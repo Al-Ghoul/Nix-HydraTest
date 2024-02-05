@@ -15,12 +15,14 @@
         inherit inputs pkgs;
 
         modules = [
-          ({ ... }: {
+          ({ pkgs, ... }: {
             languages = {
               # nix.enable = true;
               c.enable = true;
               cplusplus.enable = true;
             };
+
+            packages = with pkgs; [ cz-cli yarn ];
 
             env = { MYSECRET = "nothing special"; };
 
