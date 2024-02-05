@@ -24,8 +24,6 @@
 
             packages = with pkgs; [ cz-cli yarn ];
 
-            env = { MYSECRET = "nothing special"; };
-
             pre-commit.hooks = {
               deadnix.enable = true;
               nil.enable = true;
