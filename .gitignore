@@ -2,3 +2,4 @@
 .devenv
 .pre-commit-config.yaml
 node_modules
+build
