@@ -3,7 +3,7 @@ let
   pkgs = import nixpkgs { system = "x86_64-linux"; };
   prs = builtins.fromJSON (builtins.readFile pulls);
   prJobsets = pkgs.lib.mapAttrs (num: info: {
-    enable = 1;
+    enabled = 1;
     hidden = false;
     description = "PR ${num}:  ${info.title}";
     checkinterval = 60;
