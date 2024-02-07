@@ -6,7 +6,6 @@
   "nixexprpath": ".hydra/jobsets.nix",
   "checkinterval": 60,
   "schedulingshares": 100,
-  "enable_dynamic_run_command": false,
   "enableemail": false,
   "emailoverride": "",
   "keepnr": 1,
