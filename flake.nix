@@ -87,7 +87,6 @@
             description = "Still don't know what to put here";
             homepage = "https://github.com/Al-Ghoul/Nix-HydraTest";
             maintainers = [{ email = "Abdo.AlGhouul@gmail.com"; }];
-            license = [ ];
           };
         };
       };
