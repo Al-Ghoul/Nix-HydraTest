@@ -37,7 +37,7 @@
       };
 
       hydraJobs = let stdenv = pkgs.llvmPackages_17.stdenv;
-      in {
+      in rec {
         build = stdenv.mkDerivation (finalAttrs: {
           version = "1.0.0";
           pname = "Hello";
@@ -77,6 +77,19 @@
           '';
 
         });
+
+        tests = build.tests;
+
+        required = pkgs.releaseTools.aggregate {
+          name = "final-builds";
+          constituents = [ tests build ];
+          meta = {
+            description = "Still don't know what to put here";
+            homepage = "https://github.com/Al-Ghoul/Nix-HydraTest";
+            maintainers = [{ email = "Abdo.AlGhouul@gmail.com"; }];
+            license = [ ];
+          };
+        };
       };
 
     };
