@@ -1,6 +1,6 @@
 {
   "enable": 1,
-  "description": "Build jobs",
+  "description": "Build jobss",
   "hidden": false,
   "nixexprinput": "nixexpr",
   "nixexprpath": ".hydra/jobsets.nix",
