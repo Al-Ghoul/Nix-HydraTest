@@ -1,8 +1,9 @@
 { nixpkgs, pulls }:
 let
   pkgs = import nixpkgs { system = "x86_64-linux"; };
+
   prs = builtins.fromJSON (builtins.readFile pulls);
-  prJobsets = pkgs.lib.mapAttrs (num: info: {
+  prJobsets = builtins.mapAttrs (num: info: {
     enabled = 1;
     hidden = false;
     description = "PR ${num}:  ${info.title}";
