@@ -6,7 +6,7 @@
     devenv.url = "github:cachix/devenv";
   };
 
-  outputs = { nixpkgs, devenv, ... }@inputs:
+  outputs = { self, nixpkgs, devenv, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -16,30 +16,68 @@
 
         modules = [
           ({ pkgs, ... }: {
-            languages = {
-              # nix.enable = true;
-              c.enable = true;
-              cplusplus.enable = true;
-            };
 
-            packages = with pkgs; [ cz-cli yarn ];
+            packages = with pkgs; [ clang_17 cmake gnumake cz-cli yarn ];
 
             pre-commit.hooks = {
               deadnix.enable = true;
               nil.enable = true;
               nixfmt.enable = true;
+
               clang-format.enable = true;
               clang-tidy.enable = true;
+
               commitizen.enable = true;
               markdownlint.enable = true;
             };
 
-            enterShell = ''
-              echo "This is an entry point";
-            '';
           })
         ];
 
       };
+
+      hydraJobs = let stdenv = pkgs.llvmPackages_17.stdenv;
+      in {
+        build = stdenv.mkDerivation (finalAttrs: {
+          version = "1.0.0";
+          pname = "Hello";
+          src = self;
+
+          nativeBuildInputs = [ pkgs.cmake ];
+
+          dontPatch = true;
+
+          configurePhase = ''
+            runHook preConfigure
+            cmake -H. -B./build 
+            runHook postConfigure
+          '';
+
+          buildPhase = ''
+            runHook preBuild
+            cd build
+            make
+            runHook postBuild
+          '';
+
+          installPhase = ''
+            runHook preInstall
+            mkdir -p $out/bin
+            cp Hello $out/bin
+            runHook postInstall
+          '';
+
+          doCheck = false;
+
+          passthru.tests.run = pkgs.runCommand "hello-test" {
+            nativeBuildInputs = [ finalAttrs.finalPackage ];
+          } ''
+            diff -U3 --color=auto <(Hello) <(echo 'Hello G')
+            touch $out
+          '';
+
+        });
+      };
+
     };
 }
