@@ -82,7 +82,7 @@
 
         required = pkgs.releaseTools.aggregate {
           name = "final-builds";
-          constituents = [ tests build ];
+          constituents = [ "tests" "build" ];
           meta = {
             description = "Still don't know what to put here";
             homepage = "https://github.com/Al-Ghoul/Nix-HydraTest";
