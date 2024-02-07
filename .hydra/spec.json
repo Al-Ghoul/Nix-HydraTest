@@ -25,7 +25,7 @@
     "pulls": {
       "type": "githubpulls",
       "value": "Al-Ghoul Nix-HydraTest",
-      "emailresponsible": false,
+      "emailresponsible": false
     }
   }
 }
