@@ -1,5 +1,5 @@
 {
-  "enable": 1,
+  "enabled": 1,
   "description": "Build jobs",
   "hidden": false,
   "nixexprinput": "nixexpr",
