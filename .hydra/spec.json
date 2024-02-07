@@ -1,1 +1,31 @@
-{}
+{
+  "enable": 1,
+  "description": "Build jobs",
+  "hidden": false,
+  "nixexprinput": "nixexpr",
+  "nixexprpath": ".hydra/jobsets.nix",
+  "checkinterval": 60,
+  "schedulingshares": 100,
+  "enable_dynamic_run_command": false,
+  "enableemail": false,
+  "emailoverride": "",
+  "keepnr": 1,
+  "type": 0,
+  "inputs": {
+    "nixexpr": {
+      "value": "https://github.com/Al-Ghoul/Nix-HydraTest main",
+      "type": "git",
+      "emailresponsible": false
+    },
+    "nixpkgs": {
+      "value": "https://github.com/NixOS/nixpkgs nixos-unstable",
+      "type": "git",
+      "emailresponsible": false
+    },
+    "pulls": {
+      "type": "githubpulls",
+      "value": "Al-Ghoul Nix-HydraTest",
+      "emailresponsible": false,
+    }
+  }
+}
